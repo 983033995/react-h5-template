@@ -1,0 +1,18 @@
+{
+    "appName": "apifox",
+    "Authorization": "",
+    "path": "/src/services",
+    "projectId": [
+        1452077,
+        3903128
+    ],
+    "head": "import qs from 'qs'\nimport { SWRMutationConfiguration } from 'swr/mutation';\nimport { SWRConfiguration } from 'swr';\nimport type { AxiosRequestConfig } from 'axios'\nimport { MutationKeyWithAxiosConfig, useSWRGet, useSWRDelete, useSWRPost, useSWRPut } from '@/services/swr'\nimport http from '@/services/http'\ntype Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never",
+    "customReturn": "",
+    "customExtraFunction": "// 在此输入自定义内容\nconst generateFunction = () => {\n  const buildParams = () => {\n    const args = [];\n    if (options.pathParams.length) {\n      if (options.pathParams.length > 1) {\n        args.push(`pathParams: Expand<${options.pathParamsType}>`);\n      } else {\n        args.push(`${options.pathParams[0].name}: string`);\n      }\n    }\n    if (options.queryParams.length) {\n      args.push(`params: Expand<${options.queryParamsType}>`);\n    }\n    args.push('axiosConfig: Expand<AxiosRequestConfig> = {}');\n    const config =\n      options.apiMethod === 'get'\n        ? 'swrConfig: Expand<SWRConfiguration> = {}'\n        : `swrMutationConfig: SWRMutationConfiguration<${options.queryParamsType}, GaAny, MutationKeyWithAxiosConfig, ${options.queryParamsType}, ${options.queryParamsType}> = {}`;\n    args.push(config);\n    return args.join(', ');\n  };\n  if (options.apiMethod === 'get') {\n    const haveQueryParams = options.queryParams.length > 0;\n    const allPath = haveQueryParams ? `[\\`${options.apiPath}\\`, params]` : `\\`${options.apiPath}\\``;\n    return `${'\\n'}export const ${options.extraFunctionName} = (${buildParams()}) => {${'\\n'}    return useSWRGet<Expand<${options.apiReturnType}>${haveQueryParams ? `, Expand<${options.queryParamsType}>` : ', any'}>(${allPath}, axiosConfig, swrConfig)${'\\n'}}`;\n  } else {\n    const useApiNameMap = {\n      post: 'useSWRPost',\n      put: 'useSWRPut',\n      delete: 'useSWRDelete',\n    };\n    const useApiName = useApiNameMap[options.apiMethod] || 'useSWRMutation';\n    return `${'\\n'}export const ${options.extraFunctionName} = (${buildParams()}) => {${'\\n'}   return ${useApiName}<Expand<${options.dataParamsType}>, \n    Expand<${options.apiReturnType}>>(\\`${options.apiPath}\\`, axiosConfig, swrMutationConfig)${'\\n'}}`;\n  }\n};\ngenerateFunction();",
+    "model": "custom",
+    "prettierSetting": "{\n    \"semi\": false, \n    \"singleQuote\": true,\n    \"parser\": \"typescript\"\n}",
+    "axiosPath": "import http from \"@/services/http\"",
+    "axiosReturnKey": "data",
+    "useProjectName": true,
+    "alias": "services: @/services"
+}

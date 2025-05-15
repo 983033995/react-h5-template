@@ -1,0 +1,13 @@
+node_modules
+dist
+build
+coverage
+.vscode
+.idea
+.DS_Store
+*.log
+.env*
+!.env.example
+pnpm-lock.yaml
+*.d.ts
+services/apifox/*

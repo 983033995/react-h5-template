@@ -1,0 +1,28 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+.container {
+  .flex-column();
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 12px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: @bg-color-light;
+  border-top: 1px solid @border-color;
+  .safe-area-bottom();
+  z-index: 10;
+}

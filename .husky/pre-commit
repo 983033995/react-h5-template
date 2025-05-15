@@ -1,0 +1,8 @@
+###
+ # @FilePath: /galaxy-app-h5/.husky/pre-commit
+ # @Description: 
+### 
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx lint-staged 

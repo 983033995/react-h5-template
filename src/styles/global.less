@@ -1,0 +1,70 @@
+@import './variables.less';
+@import './mixins.less';
+
+// 全局样式
+html,
+body {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: @text-color;
+  background-color: @bg-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
+}
+
+// 统一盒模型
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// 链接样式
+a {
+  color: @primary-color;
+  text-decoration: none;
+
+  &:hover {
+    color: @primary-light;
+  }
+}
+
+// 常用辅助类
+.text-primary {
+  color: @primary-color;
+}
+
+.text-secondary {
+  color: @text-color-secondary;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.full-height {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+// 安全区适配
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+// 常见卡片样式
+.card {
+  background-color: @bg-color-light;
+  border-radius: @border-radius-base;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: @spacing-md;
+  padding: @spacing-lg;
+}
+
+// 修复一些 antd-mobile 样式问题
+:root:root {
+  --adm-color-primary: @primary-color;
+  --adm-font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}

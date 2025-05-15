@@ -1,0 +1,84 @@
+.consultation-page {
+  padding: 16px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+
+  .header {
+    text-align: center;
+    margin-bottom: 24px;
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #1677ff;
+    }
+
+    p {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+
+  .intro-card {
+    margin-bottom: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+
+    .card-content {
+      padding: 8px;
+
+      h2 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 12px;
+        color: #333;
+      }
+
+      p {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 16px;
+        line-height: 1.6;
+      }
+    }
+  }
+
+  .section {
+    margin-bottom: 24px;
+
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 16px;
+      color: #333;
+      position: relative;
+      padding-left: 12px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 16px;
+        background-color: #1677ff;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #999;
+    font-size: 12px;
+
+    p {
+      margin-bottom: 8px;
+    }
+  }
+}
