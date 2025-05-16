@@ -1,3 +1,7 @@
+/*
+ * @FilePath: /h5-react/vite.config.ts
+ * @Description:
+ */
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import { fileURLToPath } from 'url'
@@ -126,9 +130,39 @@ export default defineConfig(({ mode, command }) => {
           // 设置正确的MIME类型
           format: 'es',
           // Chunk命名策略
-          manualChunks: {
-            'vendor': ['react', 'react-dom', 'react-router-dom'],
-            'antd-mobile': ['antd-mobile'],
+          manualChunks: (id) => {
+            // 增量构建模式下不提取公共资源
+            if (isPageMode) {
+              return null; // 不创建公共chunk
+            }
+
+            // 全量构建模式下提取公共资源
+            if (id.includes('node_modules')) {
+              // 框架相关
+              if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+                return 'vendor-react';
+              }
+
+              // UI组件库
+              if (id.includes('antd-mobile') || id.includes('antd')) {
+                return 'vendor-ui';
+              }
+
+              // 工具库和其他公共依赖
+              if (
+                id.includes('axios') ||
+                id.includes('lodash') ||
+                id.includes('dayjs') ||
+                id.includes('moment') ||
+                id.includes('redux')
+              ) {
+                return 'vendor-utils';
+              }
+
+              // 其他node_modules依赖，如果没有明确分类，都归入common组
+              return 'vendor-common';
+            }
+            return null;
           },
           // 统一的输出文件结构
           chunkFileNames: (chunkInfo) => {
@@ -184,8 +218,14 @@ export default defineConfig(({ mode, command }) => {
 
             // 特殊处理CSS文件
             if (extType === 'css') {
+              // 增量构建模式下，不将任何CSS提取为公共资源
+              if (isPageMode) {
+                return `assets/${pageType}/css/[name]-[hash].[ext]`;
+              }
+
+              // 全量构建模式下，提取公共CSS资源
               // antd-mobile 的CSS归为共享资源
-              if (info.includes('antd-mobile')) {
+              if (info.includes('antd-mobile') || info.includes('antd')) {
                 return `assets/shared/css/[name]-[hash].[ext]`;
               }
 
@@ -195,6 +235,12 @@ export default defineConfig(({ mode, command }) => {
             }
 
             // 其他资源文件
+            // 增量构建模式下，所有资源直接归属到当前页面
+            if (isPageMode) {
+              return `assets/${pageType}/[ext]/[name]-[hash].[ext]`;
+            }
+
+            // 全量构建模式下，根据文件名确定归属
             const pageName = getPageName(info);
             return `assets/${pageName}/[ext]/[name]-[hash].[ext]`;
           },
