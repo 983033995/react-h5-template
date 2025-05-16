@@ -42,6 +42,8 @@ pnpm dev
 
 # 启动特定页面
 pnpm dev:consultation  # 咨询页面
+pnpm dev:articleDetail     # 文章详情
+
 
 ### 代码检查和格式化
 
@@ -64,6 +66,8 @@ pnpm build
 
 # 构建特定页面
 pnpm build:consultation  # 只构建咨询页面
+pnpm build:articleDetail     # 只构建文章详情
+
 
 ### 创建新页面
 

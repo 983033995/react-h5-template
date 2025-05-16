@@ -21,7 +21,10 @@
     "preview": "vite preview",
     "prepare": "husky",
     "create-page": "node scripts/create-page.js",
-    "update-dist": "bash scripts/update-dist.sh"
+    "update-dist": "bash scripts/update-dist.sh",
+    "dev:articleDetail": "cross-env PAGE_TYPE=articleDetail vite",
+    "build:articleDetail": "tsc -b && cross-env PAGE_TYPE=articleDetail vite build --mode prod",
+    "build:articleDetail:test": "tsc -b && cross-env PAGE_TYPE=articleDetail vite build --mode test"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [

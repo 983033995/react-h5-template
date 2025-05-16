@@ -11,7 +11,7 @@
  * 支持的页面模式列表
  * 用于构建配置和页面资源归属判断
  */
-export const PAGE_MODES = ['consultation'];
+export const PAGE_MODES = ['consultation', 'articleDetail'];
 
 /**
  * 页面信息配置
@@ -22,6 +22,12 @@ export const PAGE_INFO: Record<string, { title: string; description: string; key
     title: 'Galaxy咨询服务',
     description: '专业咨询服务平台，为您解答各类问题',
     keywords: '咨询,服务,解答,专业',
+  },
+  articleDetail: {
+    title: '文章详情',
+    description:
+      '银河咨询成立于2007年，是一家提供一站式香港身份规划和服务的科技创新型企业，总部位于深圳，在北京、上海、香港建立分公司，我们的客户遍布IT、金融、法律、医学、制造、农业等行业。',
+    keywords: '银河咨询',
   },
 };
 

@@ -49,7 +49,7 @@ const questions = [
     question: '请输入页面名称（英文，如marketing）:',
     validate: (input) => {
       if (!input) return '页面名称不能为空';
-      if (!/^[a-z][a-z0-9-]*$/.test(input)) return '页面名称必须是小写字母开头，可包含小写字母、数字和连字符';
+      if (!/^[a-zA-Z][a-zA-Z0-9]*$/.test(input)) return '页面名称必须是字母开头，可包含字母和数字';
       return true;
     }
   },
