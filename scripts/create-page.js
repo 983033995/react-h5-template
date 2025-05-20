@@ -396,6 +396,7 @@ import { createRoot } from 'react-dom/client'
 import 'antd-mobile/es/global'
 import '../index.css'
 import '../styles/global.less'
+import 'virtual:iconfont'
 import ${pageName.charAt(0).toUpperCase() + pageName.slice(1)}Page from '../pages/${pageName}'
 
 createRoot(document.getElementById('root')!).render(

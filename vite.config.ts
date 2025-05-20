@@ -8,6 +8,8 @@ import { fileURLToPath } from 'url'
 import { dirname, resolve } from 'path'
 import fs from 'fs'
 import alias from '@rollup/plugin-alias'
+import iconfontLoader, { FileSystemIconLoader } from '@galaxy-fe/vite-plugin-unocss-iconfont'
+import Icons from 'unplugin-icons/vite'
 import { PAGE_MODES, getPageName } from './src/config/pages'
 
 // 获取当前文件URL
@@ -65,7 +67,17 @@ export default defineConfig(({ mode, command }) => {
           { find: '@hooks', replacement: resolve(__dirname, 'src/hooks') },
           { find: '@services', replacement: resolve(__dirname, 'src/services') },
         ]
-      })
+      }),
+      iconfontLoader({
+        cookie: 'locale=zh-cn; isg=BAwM2th6hyRUbpIcKM76hqhZ3Ww-RbDvAZ-eEWbNGLda8az7jlWAfwIClflJuehH; ctoken=hiC08YROpmjnSWhaHXFDEmIY; xlly_s=1; EGG_SESS_ICONFONT=dzIFRF6UFHpWicZx2_bPckt6tcP0u-elZfnZNz_70XbODm6HVGlIgb1-k021opQ2RnlrOJoHmE3H3yejPtNQ4eKaGlqIXZVPWr-RIoyduyT4X6bY9P2tHgn_nm__9mfG; u=951001; u.sig=uFHEc4J6kIeM_x81lB5Bqn40pJ8k0UtwpDVguKVFOaw; tfstk=gELtMyZ2zXFthOLOtCo3m7lo2_hHkDAasdR7otXgcpppNQyGchDwHnpJLi4DGA-vpN8HjrXiQZdXEZHoE40k_C7NlYDkNZm0mZ1jotihfFe7qQHoE40nfW_xBYvmD2Xx9sWC1s1f1XQCMs_bcr9fdM15ZR_XhKsQOs5O1t_fc96CLs_fhK_j9w6FMZ6Xr4MAd560k3u-R2GofT4bleCOfDA1dr1eJ1IOFCTTlrNV6GBW19MoXI8NDdI9-VeP6HOJL1pqzP71Dht55EH-WwOyxd1phYEAd3LwkgYteuW67tJR5HHQWZ_1wIIkxjZRKnOeJMLtqS5eSITNqagzCtxHwECvuxupeC99VgT_BgkprUKxR8bCQlGK9orVf6ze2clIoSK6I6Bo6qE40MlF9TcLzorVYX5dEXbb0oSET',
+        pid: '4429575',
+        ctoken: 'XvUqxMtqtL4PkD1QEdMeDLaA',
+      }),
+      Icons({
+        customCollections: {
+          font: FileSystemIconLoader(svg => svg.replace(/fill="#[\w\d]+"/g, 'fill="currentColor"').replace(/style="[^"]*"/g, '')),
+        },
+      }),
     ],
     resolve: {
       alias: {
