@@ -1,10 +1,13 @@
 /*
- * @FilePath: /galaxy-app-h5/src/services/http.ts
+ * @FilePath: /h5-react/src/services/http.ts
  * @Description:
  */
 import axios, { type AxiosRequestConfig } from 'axios';
 import get from 'lodash-es/get';
 import { Toast } from 'antd-mobile';
+import composeMiddlewares from './axiosInterceptors/request';
+import Qs from 'qs';
+import { getStorageItem } from '../utils/storageUtils';
 
 enum RES_CODE {
   Success = 200,
@@ -17,21 +20,24 @@ export interface HttpRespData<T = any> {
   msg: string;
 }
 
-function createHttp(config: AxiosRequestConfig) {
-  const http = axios.create(config);
+function createHttp(config: AxiosRequestConfig = {}) {
+  const http = axios.create({
+    baseURL: import.meta.env.VITE_BASE_API,
+    timeout: 60 * 1000,
+    paramsSerializer: params => {
+      return Qs.stringify(params, { arrayFormat: 'indices' });
+    },
+    headers: {
+      Token: getStorageItem('token'),
+      app_platform: 'h5',
+      App: 'galaxy-admin',
+    },
+    ...config,
+  });
 
-  http.interceptors.request.use(
-    async config => {
-      //   const token = getToken() || undefined;
-      //   config.headers.Authorization = token;
-      // const uid = getUid() || undefined;
-      // config.headers.uid = uid;
-      return config;
-    },
-    error => {
-      return Promise.reject(error);
-    },
-  );
+  http.interceptors.request.use(composeMiddlewares, error => {
+    return Promise.reject(error);
+  });
 
   http.interceptors.response.use(
     res => {
@@ -59,8 +65,6 @@ function createHttp(config: AxiosRequestConfig) {
       }
     },
     error => {
-      console.log(error);
-      console.log(error?.response);
       if (error.response) return Promise.reject(error.response.data);
       return Promise.reject(error.message);
     },
@@ -69,6 +73,5 @@ function createHttp(config: AxiosRequestConfig) {
   return http;
 }
 
-export default createHttp({
-  baseURL: import.meta.env.VITE_APP_GO_API,
-});
+// 导出默认的http实例
+export default createHttp();

@@ -1,6 +1,6 @@
 /*
- * @FilePath: /galaxy-app-h5/eslint.config.js
- * @Description: 
+ * @FilePath: /h5-react/eslint.config.js
+ * @Description:
  */
 import js from '@eslint/js'
 import globals from 'globals'
@@ -9,7 +9,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'src/services/apifox'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],

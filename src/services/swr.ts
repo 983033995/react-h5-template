@@ -1,5 +1,5 @@
 /*
- * @FilePath: /galaxy-app-h5/src/services/swr.ts
+ * @FilePath: /h5-react/src/services/swr.ts
  * @Description:
  */
 import useSWRMutation, { type SWRMutationConfiguration } from 'swr/mutation';

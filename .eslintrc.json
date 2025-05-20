@@ -36,5 +36,14 @@
     "react": {
       "version": "detect"
     }
-  }
-} 
+  },
+  "overrides": [
+    {
+      "files": ["src/services/apifox/**/*.ts", "src/services/apifox/**/*.tsx"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/ban-ts-comment": "off"
+      }
+    }
+  ]
+}

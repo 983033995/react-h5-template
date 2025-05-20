@@ -1,3 +1,7 @@
+/*
+ * @FilePath: /h5-react/src/components/AppLayout.tsx
+ * @Description:
+ */
 import { type FC } from 'react';
 import { TabBar } from 'antd-mobile';
 import { AppOutline, UserOutline, UnorderedListOutline } from 'antd-mobile-icons';
